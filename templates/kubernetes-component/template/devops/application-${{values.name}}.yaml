@@ -5,15 +5,12 @@ metadata:
   namespace: devops-tools
 spec:
   destination:
-    namespace: devops-tools
+    namespace: ${{values.name}}
     server: "https://kubernetes.default.svc"
-  project: ${{values.name}}
+  project: default
   source:
     repoURL: https://github.com/moquintanilha/${{values.name}}
     targetRevision: HEAD
     path: ${{values.name}}
-
-    kustomize:
-      version: v3.5.4
   syncPolicy:
     automated: {}
