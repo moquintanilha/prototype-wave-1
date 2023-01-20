@@ -91,19 +91,19 @@ catalog:
     - allow: [Component, System, API, Group, User, Resource, Location]
   locations:
     - type: url
-      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/kubernetes-component/Template.yaml
+      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/templates/kubernetes-component/Template.yaml
       rules:
         - allow: [Template, Domain]
     - type: url
-      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/entity/infra-group.yaml
+      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/templates/entity/infra-group.yaml
       rules:
         - allow: [Group]
     - type: url
-      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/entity/compute-group.yaml
+      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/templates/entity/compute-group.yaml
       rules:
         - allow: [ Group ]
     - type: url
-      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/entity/automation-group.yaml
+      target: https://github.com/moquintanilha/prototype-wave-1/blob/main/templates/entity/infra-group.yaml
       rules:
         - allow: [ Group ]
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
