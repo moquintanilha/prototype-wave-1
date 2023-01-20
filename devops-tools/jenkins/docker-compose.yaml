@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  jenkins:
+
+services:
+  pipeline:
+    image: jenkins/jenkins:2.375.2
+    container_name: jenkins
+    networks:
+      - jenkins
+    ports:
+      - "8080:8080"
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1

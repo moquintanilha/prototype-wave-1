@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{values.name}}
+  namespace: devops-tools
+spec:
+  destination:
+    namespace: devops-tools
+    server: "https://kubernetes.default.svc"
+  project: ${{values.name}}
+  source:
+    repoURL: https://github.com/moquintanilha/${{values.name}}
+    targetRevision: HEAD
+    path: ${{values.name}}
+
+    kustomize:
+      version: v3.5.4
+  syncPolicy:
+    automated: {}

@@ -1,0 +1,91 @@
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: kubernetes-component
+  title: Kubernetes Component
+  description: An example template for the scaffolder that creates a simple Kubernetes service
+spec:
+  owner: compute
+  type: service
+
+  parameters:
+    - title: Project configurations
+      required: [name, title, description, namespace]
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the project
+          ui:autofocus: true
+        title:
+          title: title
+          type: string
+          description: Friendly name of the project that will be displayed in the README and catalog.
+        description:
+          title: Description
+          type: string
+          description: Brief description of your project.
+          ui.options:
+            rows: 5
+        namespace:
+          title: namespace
+          type: string
+          description: Kubernetes namespace for the application. Use only letters and hyphens.
+        owner:
+          title: Owner(s)
+          type: string
+          description: Team responsible for the project.
+          ui:field: OwnerPicker
+          ui.options:
+            allowedKinds: [Group]
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  steps:
+    - id: template
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./template
+        values:
+          name: ${{ parameters.name }}
+          title: ${{ parameters.title }}
+          description: ${{ parameters.description }}
+          namespace: ${{ parameters.namespace }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: ${{ parameters.description }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+
+
