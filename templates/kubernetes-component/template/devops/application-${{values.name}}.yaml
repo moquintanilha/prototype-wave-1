@@ -14,4 +14,4 @@ spec:
     path: ${{values.name}}
   syncPolicy:
     syncOptions:
-      CreateNamespace=true
+      - CreateNamespace=true
