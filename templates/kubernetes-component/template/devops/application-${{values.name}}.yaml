@@ -2,15 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ${{values.name}}
-  namespace: devops-tools
+  namespace: argocd
 spec:
   destination:
     namespace: ${{values.name}}
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    repoURL: https://github.com/moquintanilha/${{values.name}}
-    targetRevision: HEAD
+    repoURL: https://github.com/moquintanilha/${{values.name}}.git
+    targetRevision: master
     path: ${{values.name}}
   syncPolicy:
-    automated: {}
+    syncOptions:
+      CreateNamespace=true
