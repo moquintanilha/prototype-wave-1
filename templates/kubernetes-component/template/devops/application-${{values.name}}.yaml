@@ -4,14 +4,14 @@ metadata:
   name: ${{values.name}}
   namespace: argocd
 spec:
-  destination:
-    namespace: ${{values.name}}
-    server: "https://kubernetes.default.svc"
   project: default
   source:
     repoURL: https://github.com/moquintanilha/${{values.name}}.git
     targetRevision: master
-    path: ${{values.name}}
+    path: ${{values.name}} 
+  destination:
+    namespace: ${{values.name}}
+    server: "https://kubernetes.default.svc"
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
