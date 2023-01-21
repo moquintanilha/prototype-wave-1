@@ -10,7 +10,7 @@ spec:
     targetRevision: master
     path: ${{values.name}} 
   destination:
-    namespace: ${{values.name}}
+    namespace: ${{values.namespace}}
     server: "https://kubernetes.default.svc"
   syncPolicy:
     syncOptions:
