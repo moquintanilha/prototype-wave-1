@@ -17,6 +17,9 @@ Dummy-application | _None_
 Yarn | ```1.22.19```
 NodeJS | ```v16.18.0```
 Helm | ```v3.8.0+gd141386```
+Kustomize | ```v4.5.7```
+Kubernetes Server | ```v1.25.2```
+Kubernetes Client | ```v1.25.2```
 
 
 Get starting ```Dummy-application``` in local environment:
