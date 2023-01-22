@@ -7,14 +7,13 @@ spec:
   project: default # Segregated by BU - e.g 'PCI' for pci applications and 'Crypto' for crypto application.   
   source:
     repoURL: https://github.com/moquintanilha/${{values.name}}.git
-    targetRevision: master
+    targetRevision: master # Branch of the implement, e.g 'staging' or 'production'. Branch default is 'initial-scaffolding'
     path: ${{values.name}}
-
-    kustomize:
-      version: v4.4.0
   destination:
     namespace: ${{values.namespace}}
     server: "https://kubernetes.default.svc"
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+    automated:
+      selfHeal: true

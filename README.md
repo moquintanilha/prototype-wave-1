@@ -1,6 +1,6 @@
-# Getting Starting
+# Wave 1 - Application definition and development
 
-This prototype is composed of tools specialized in the continuous delivery of new versions of software in container environments.
+This prototype is composed of tools specialized in the definition and continuous delivery of new software versions in container environments.
 
 It is important to mention that there are numerous strategies and with a different composition of tools that fulfill this role.
 
@@ -14,7 +14,7 @@ Docker engine | ```20.10.21```
 ArgoCD | ```2.5.7```
 Backstage | ```1.10.1```
 Dummy-application | _None_
-YARN | ```1.22.19```
+Yarn | ```1.22.19```
 NodeJS | ```v16.18.0```
 Helm | ```v3.8.0+gd141386```
 
@@ -61,10 +61,9 @@ __DoD - Definition of Done__
 
 # Make it yourself 💡 
 
-**Before anything, clone this project.**
-
-__Step 1 - Setup Environment__
-
+```
+Before anything, clone this project.
+```
 First, start ```Backstage```. for this:
 
 - Go to project directory.
@@ -131,6 +130,17 @@ Handling connection for 8000
 'admin:login' logged in successfully
 Context 'localhost:8000' updated
 ```
+# Pin points 🚧 
 
+Item | Component |Description
+:----|:----------|:-----------
+Config as-a-code|ArgoCD|Create new application, external cluster connection, configure projects, LDAP service integration and connect repo.
+Branching|Backstage|Support to multi-branches (e.g Staging and Production) and protection branch (minimal reviewer with approval process).
+Manifests|Repo|Manifest update, e.g tag image, replicas or resources.
 
+# Parking lot  ⚠️ 
+
+- Strategy for defining ArgoCD projects.
+- Define where to deploy Argocd, e.g _K8s cluser - common service_.
+- Define convention to: _project name_ and _application name_.
 

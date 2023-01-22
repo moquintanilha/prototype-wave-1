@@ -67,6 +67,12 @@ auth:
   providers: {}
 
 scaffolder:
+  # Use to customize default commit author info used when new components are created
+  defaultAuthor:
+    name: Infraestructura
+    email: infraestructura@mercadolibre.com
+  # Use to customize the default commit message when new components are created
+  defaultCommitMessage: 'Initial commit'
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
