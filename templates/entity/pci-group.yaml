@@ -2,11 +2,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: compute
-  description: The compute team
+  name: pci
+  description: The pci team
 spec:
   type: team
   profile:
-    displayName: Compute
+    displayName: PCI
     email: infraestructura@mercadolibre.com
   children: []

@@ -2,11 +2,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: automation
-  description: The automation team
+  name: crypto
+  description: The crypto team
 spec:
   type: team
   profile:
-    displayName: Automation
+    displayName: Crypto
     email: infraestructura@mercadolibre.com
   children: []

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{values.name}}
+  namespace: argocd
+spec:
+  project: default # Segregated by BU - e.g 'PCI' for pci applications and 'Crypto' for crypto application.   
+  source:
+    repoURL: https://github.com/moquintanilha/${{values.name}}.git
+    targetRevision: master
+    path: ${{values.name}}
+
+    kustomize:
+      version: v4.4.0
+  destination:
+    namespace: ${{values.namespace}}
+    server: "https://kubernetes.default.svc"
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

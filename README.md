@@ -11,9 +11,35 @@ Tool | Version
 Docker-desktop | ```4.15.0```
 DockerHub account | _None_
 Docker engine | ```20.10.21```
-ArgoCD | ```2.5.4```
+ArgoCD | ```2.5.7```
 Backstage | ```1.10.1```
 Dummy-application | _None_
+YARN | ```1.22.19```
+NodeJS | ```v16.18.0```
+Helm | ```v3.8.0+gd141386```
+
+
+Get starting ```Dummy-application``` in local environment:
+
+1. Pull docker image
+```bash
+docker pull 8eab29e/wave-1:v1.0
+```
+
+2. Running container
+```bash
+docker run --name=dummy-app -p :8080 8eab29e/wave-1:v1.0
+```
+3. Testing connection
+```bash
+curl -iv http://localhost:8080/ping
+```
+
+Output:
+
+```bash
+'pong'
+```
 
 __DoR - Definiton of Ready__
 
@@ -32,4 +58,79 @@ __DoD - Definition of Done__
 
 - Automatic deployment of a release in a container environment.
 - Automatic synchronization of the application when it detects any difference between the repository and the target cluster.
+
+# Make it yourself 💡 
+
+**Before anything, clone this project.**
+
+__Step 1 - Setup Environment__
+
+First, start ```Backstage```. for this:
+
+- Go to project directory.
+
+```bash
+cd devops-tools/backstage/app
+```
+
+ - Dependecies install.
+
+```bash
+yarn install
+```
+
+- Start Backstage application
+
+```bash
+yarn dev
+```
+
+Second, GitOps tool install, in this case ```ArgoCD```. For this:
+
+- Add ArgoCD repo.
+
+```bash
+helm repo add argo https://argoproj.github.io/argo-helm
+```
+
+- Create ArgoCD namespace
+```bash
+kubectl create ns argocd
+```
+
+- Implement ArgoCD charts
+
+```bash
+helm install gitops argo/argo-cd --version 5.19.3 -n argocd
+```
+
+- ArgoCD service expose
+
+```bash
+kubectl port-forward svc/gitops-argocd-server -n argocd 8000:80 &
+```
+
+- Login to ArgoCD
+
+Before, you need to get password in a secrets:
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+```
+
+```bash
+argocd login localhost:8000
+```
+
+output:
+
+```bash
+Username: admin <--- ArgoCD default user
+Password:
+Handling connection for 8000
+'admin:login' logged in successfully
+Context 'localhost:8000' updated
+```
+
+
 

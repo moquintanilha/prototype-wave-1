@@ -5,7 +5,6 @@ metadata:
   labels:
     app: ${{ values.name }}
   name: ${{ values.name }}
-  namespace: ${{ values.namespace }}
 spec:
   replicas: 1
   selector:

@@ -2,11 +2,11 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: kubernetes-component
-  title: Kubernetes Component
-  description: An example template for the scaffolder that creates a simple Kubernetes service
+  name: general-kubernetes-component
+  title: General Kubernetes Component - YAML Manifests
+  description: An example template for the scaffolder that creates a simple Kubernetes application.
 spec:
-  owner: compute
+  owner: infrastructure
   type: service
 
   parameters:
@@ -56,7 +56,7 @@ spec:
       name: Fetch Skeleton + Template
       action: fetch:template
       input:
-        url: ./template
+        url: ./template-manifests
         values:
           name: ${{ parameters.name }}
           title: ${{ parameters.title }}
